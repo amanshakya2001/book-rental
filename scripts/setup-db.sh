@@ -8,7 +8,7 @@ set -e
 echo "🗄️ Setting up database for BookRental..."
 
 # Check if DATABASE_URL is set
-if [ -z "$DATABASE_URL" ]; then
+if [ -z "$POSTGRES_URL" ]; then
     echo "❌ ERROR: DATABASE_URL environment variable is not set"
     echo "Please set your DATABASE_URL in Render dashboard first"
     exit 1
