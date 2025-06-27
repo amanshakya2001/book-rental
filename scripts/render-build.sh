@@ -54,7 +54,4 @@ success "Application is ready for deployment on Render"
 
 log "Build completed successfully! 🎉"
 
-npm run start
-success "Application is live on Render"
-
 
