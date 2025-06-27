@@ -7,19 +7,19 @@ set -e
 
 echo "🗄️ Setting up database for BookRental..."
 
-# Check if DATABASE_URL is set
+# Check if POSTGRES_URL is set
 if [ -z "$POSTGRES_URL" ]; then
-    echo "❌ ERROR: DATABASE_URL environment variable is not set"
-    echo "Please set your DATABASE_URL in Render dashboard first"
+    echo "❌ ERROR: POSTGRES_URL environment variable is not set"
+    echo "Please set your POSTGRES_URL in Render dashboard first"
     exit 1
 fi
 
-echo "✅ DATABASE_URL found"
+echo "✅ POSTGRES_URL found"
 
 # Run schema
 echo "📋 Creating database schema..."
 if [ -f "sql/schema.sql" ]; then
-    psql "$DATABASE_URL" -f sql/schema.sql
+    psql "$POSTGRES_URL" -f sql/schema.sql
     echo "✅ Schema created successfully"
 else
     echo "❌ Schema file not found: sql/schema.sql"
@@ -32,7 +32,7 @@ if [ -d "migrations" ]; then
     for migration in migrations/*.sql; do
         if [ -f "$migration" ]; then
             echo "  📝 Running: $(basename "$migration")"
-            psql "$DATABASE_URL" -f "$migration"
+            psql "$POSTGRES_URL" -f "$migration"
         fi
     done
     echo "✅ All migrations completed"
